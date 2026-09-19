@@ -221,15 +221,21 @@ fun TracerouteTab() {
 @Composable
 fun IpInfoTab() {
     val context = LocalContext.current
-    val wifiManager = remember { context.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager }
-    val localIp = remember {
-        val ip = wifiManager.connectionInfo.ipAddress
-        if (ip != 0) String.format("%d.%d.%d.%d", ip and 0xff, ip shr 8 and 0xff, ip shr 16 and 0xff, ip shr 24 and 0xff)
-        else "Not connected to WiFi"
-    }
+    var localIp by remember { mutableStateOf("Loading...") }
     var publicIpOutput by remember { mutableStateOf("") }
     var isLoading by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
+
+    LaunchedEffect(Unit) {
+        localIp = try {
+            val wifiManager = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+            val ip = wifiManager.connectionInfo?.ipAddress ?: 0
+            if (ip != 0) String.format("%d.%d.%d.%d", ip and 0xff, ip shr 8 and 0xff, ip shr 16 and 0xff, ip shr 24 and 0xff)
+            else "Not connected to WiFi"
+        } catch (e: Exception) {
+            "Unavailable (${e.message})"
+        }
+    }
 
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp)) {
         Text("IP Information", fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
@@ -241,7 +247,11 @@ fun IpInfoTab() {
         Button(onClick = {
             isLoading = true
             scope.launch {
-                publicIpOutput = withContext(Dispatchers.IO) { runTermuxCommand("curl", "-s", "ipinfo.io") }
+                publicIpOutput = try {
+                    withContext(Dispatchers.IO) { runTermuxCommand("curl", "-s", "ipinfo.io") }
+                } catch (e: Exception) {
+                    "Error: ${e.message}"
+                }
                 if (publicIpOutput.isBlank()) publicIpOutput = "Could not fetch (no internet or service unavailable)"
                 isLoading = false
             }

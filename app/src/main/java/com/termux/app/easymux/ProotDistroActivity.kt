@@ -1,5 +1,8 @@
 package com.termux.app.easymux
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,9 +14,11 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.termux.app.TermuxActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -43,6 +48,15 @@ private fun runTermuxCommand(vararg args: String): String {
     }
 }
 
+private fun isDistroInstalled(alias: String): Boolean {
+    return try {
+        val dir = File("$PREFIX/var/lib/proot-distro/installed-rootfs/$alias")
+        dir.exists() && dir.isDirectory
+    } catch (e: Exception) {
+        false
+    }
+}
+
 data class DistroInfo(val displayName: String, val alias: String)
 
 class ProotDistroActivity : ComponentActivity() {
@@ -58,6 +72,7 @@ class ProotDistroActivity : ComponentActivity() {
 
 @Composable
 fun ProotDistroScreen(onBack: () -> Unit) {
+    val context = LocalContext.current
     val distros = listOf(
         DistroInfo("Ubuntu", "ubuntu"),
         DistroInfo("Debian", "debian"),
@@ -75,8 +90,9 @@ fun ProotDistroScreen(onBack: () -> Unit) {
             val binExists = withContext(Dispatchers.IO) { File("$PREFIX/bin/proot-distro").exists() }
             isProotInstalled = binExists
             if (binExists) {
-                val output = withContext(Dispatchers.IO) { runTermuxCommand("proot-distro", "list", "--installed") }
-                installedDistros = distros.filter { output.contains(it.alias, ignoreCase = true) }.map { it.alias }.toSet()
+                installedDistros = withContext(Dispatchers.IO) {
+                    distros.filter { isDistroInstalled(it.alias) }.map { it.alias }.toSet()
+                }
             }
         }
     }
@@ -98,10 +114,11 @@ fun ProotDistroScreen(onBack: () -> Unit) {
         statusMessage = "Running: proot-distro install ${distro.alias}"
         scope.launch {
             val output = withContext(Dispatchers.IO) { runTermuxCommand("proot-distro", "install", distro.alias) }
-            statusMessage = if (output.contains("error", ignoreCase = true) && !output.contains("already installed")) {
-                "Failed: ${output.takeLast(200)}"
+            val nowInstalled = withContext(Dispatchers.IO) { isDistroInstalled(distro.alias) }
+            statusMessage = if (nowInstalled) {
+                "${distro.displayName} installed successfully"
             } else {
-                "${distro.displayName} installed"
+                "Failed: ${output.takeLast(200)}"
             }
             busyDistro = null
             refresh()
@@ -112,11 +129,19 @@ fun ProotDistroScreen(onBack: () -> Unit) {
         busyDistro = distro.alias
         statusMessage = "Running: proot-distro remove ${distro.alias}"
         scope.launch {
-            withContext(Dispatchers.IO) { runTermuxCommand("proot-distro", "remove", distro.alias) }
+            withContext(Dispatchers.IO) { runTermuxCommand("proot-distro", "remove", "-y", distro.alias) }
             statusMessage = "${distro.displayName} removed"
             busyDistro = null
             refresh()
         }
+    }
+
+    fun openDistro(distro: DistroInfo) {
+        val command = "proot-distro login ${distro.alias}"
+        val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("EasyMux", command))
+        statusMessage = "Command copied: $command — paste it in the terminal that just opened"
+        context.startActivity(Intent(context, TermuxActivity::class.java))
     }
 
     Surface(modifier = Modifier.fillMaxSize()) {
@@ -165,8 +190,7 @@ fun ProotDistroScreen(onBack: () -> Unit) {
                                 if (!isProotInstalled) {
                                     installProotIfNeeded { installDistro(distro) }
                                 } else if (isInstalled) {
-                                    // Open terminal and let user run: proot-distro login <alias>
-                                    statusMessage = "To enter: open Terminal and run 'proot-distro login ${distro.alias}'"
+                                    openDistro(distro)
                                 } else {
                                     installDistro(distro)
                                 }

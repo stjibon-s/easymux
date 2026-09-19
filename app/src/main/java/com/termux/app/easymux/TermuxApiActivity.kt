@@ -92,30 +92,36 @@ fun BatteryTab() {
     var temp by remember { mutableStateOf("Unknown") }
     var plugged by remember { mutableStateOf("Unknown") }
 
+    var batteryError by remember { mutableStateOf("") }
     fun refresh() {
-        val intentFilter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
-        val batteryStatus = context.registerReceiver(null as BroadcastReceiver?, intentFilter)
-        batteryStatus?.let {
-            val lvl = it.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
-            val scale = it.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
-            level = if (lvl >= 0 && scale > 0) (lvl * 100 / scale) else -1
-            val st = it.getIntExtra(BatteryManager.EXTRA_STATUS, -1)
-            status = when (st) {
-                BatteryManager.BATTERY_STATUS_CHARGING -> "Charging"
-                BatteryManager.BATTERY_STATUS_DISCHARGING -> "Discharging"
-                BatteryManager.BATTERY_STATUS_FULL -> "Full"
-                BatteryManager.BATTERY_STATUS_NOT_CHARGING -> "Not charging"
-                else -> "Unknown"
+        try {
+            val intentFilter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
+            val batteryStatus = context.registerReceiver(null as BroadcastReceiver?, intentFilter)
+            batteryStatus?.let {
+                val lvl = it.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
+                val scale = it.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
+                level = if (lvl >= 0 && scale > 0) (lvl * 100 / scale) else -1
+                val st = it.getIntExtra(BatteryManager.EXTRA_STATUS, -1)
+                status = when (st) {
+                    BatteryManager.BATTERY_STATUS_CHARGING -> "Charging"
+                    BatteryManager.BATTERY_STATUS_DISCHARGING -> "Discharging"
+                    BatteryManager.BATTERY_STATUS_FULL -> "Full"
+                    BatteryManager.BATTERY_STATUS_NOT_CHARGING -> "Not charging"
+                    else -> "Unknown"
+                }
+                val t = it.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1)
+                temp = if (t >= 0) "${t / 10.0}°C" else "Unknown"
+                val plug = it.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1)
+                plugged = when (plug) {
+                    BatteryManager.BATTERY_PLUGGED_AC -> "AC Charger"
+                    BatteryManager.BATTERY_PLUGGED_USB -> "USB"
+                    BatteryManager.BATTERY_PLUGGED_WIRELESS -> "Wireless"
+                    else -> "Not plugged"
+                }
             }
-            val t = it.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1)
-            temp = if (t >= 0) "${t / 10.0}°C" else "Unknown"
-            val plug = it.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1)
-            plugged = when (plug) {
-                BatteryManager.BATTERY_PLUGGED_AC -> "AC Charger"
-                BatteryManager.BATTERY_PLUGGED_USB -> "USB"
-                BatteryManager.BATTERY_PLUGGED_WIRELESS -> "Wireless"
-                else -> "Not plugged"
-            }
+            batteryError = ""
+        } catch (e: Exception) {
+            batteryError = "Error: ${e.message}"
         }
     }
 
@@ -129,6 +135,10 @@ fun BatteryTab() {
                 Text("Temperature: $temp", fontSize = 15.sp)
                 Text("Power source: $plugged", fontSize = 15.sp)
             }
+        }
+        if (batteryError.isNotBlank()) {
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(batteryError, fontSize = 12.sp)
         }
         Spacer(modifier = Modifier.height(12.dp))
         Button(onClick = { refresh() }) { Text("Refresh") }
