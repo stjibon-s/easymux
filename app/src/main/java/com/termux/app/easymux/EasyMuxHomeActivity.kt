@@ -101,6 +101,10 @@ fun EasyMuxHomeScreen(onOpenTerminal: () -> Unit) {
                             context.startActivity(Intent(context, ProcessManagerActivity::class.java))
                         } else if (feature.title == "Network Tools") {
                             context.startActivity(Intent(context, NetworkToolsActivity::class.java))
+                        } else if (feature.title == "Termux:API") {
+                                context.startActivity(Intent(context, TermuxApiActivity::class.java))
+                        } else if (feature.title == "Linux Distros") {
+                                context.startActivity(Intent(context, ProotDistroActivity::class.java))
                         } else if (feature.comingSoon) {
                             Toast.makeText(context, "${feature.title} — coming soon", Toast.LENGTH_SHORT).show()
                         }
