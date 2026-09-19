@@ -55,6 +55,7 @@ fun EasyMuxHomeScreen(onOpenTerminal: () -> Unit) {
         FeatureItem("Process Manager", "View and control running processes", Icons.Filled.Memory),
         FeatureItem("Network Tools", "Ping, port scan, and more", Icons.Filled.Wifi),
         FeatureItem("Termux:API", "Battery, clipboard, vibrate, volume, share", Icons.Filled.PhoneAndroid),
+        FeatureItem("Linux Distros", "Run Ubuntu, Debian, Kali, Alpine", Icons.Filled.Storage),
         FeatureItem("Settings", "Configure EasyMux", Icons.Filled.Settings)
     )
 

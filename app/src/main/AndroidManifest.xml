@@ -114,6 +114,11 @@
             android:exported="false"
             android:theme="@style/Theme.TermuxActivity.DayNight.NoActionBar" />
 
+                <activity
+            android:name="com.termux.app.easymux.ProotDistroActivity"
+            android:exported="false"
+            android:theme="@style/Theme.TermuxActivity.DayNight.NoActionBar" />
+
         <activity-alias
             android:name=".HomeActivity"
             android:exported="true"
