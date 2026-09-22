@@ -24,6 +24,7 @@
         android:protectionLevel="dangerous" />
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -116,6 +117,16 @@
 
                 <activity
             android:name="com.termux.app.easymux.ProotDistroActivity"
+            android:exported="false"
+            android:theme="@style/Theme.TermuxActivity.DayNight.NoActionBar" />
+
+                <activity
+            android:name="com.termux.app.easymux.TermuxApiActivity"
+            android:exported="false"
+            android:theme="@style/Theme.TermuxActivity.DayNight.NoActionBar" />
+
+                <activity
+            android:name="com.termux.app.easymux.SecurityToolsActivity"
             android:exported="false"
             android:theme="@style/Theme.TermuxActivity.DayNight.NoActionBar" />
 

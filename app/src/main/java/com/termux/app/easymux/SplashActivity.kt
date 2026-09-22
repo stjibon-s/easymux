@@ -30,7 +30,7 @@ class SplashActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MaterialTheme {
+            EasyMuxTheme {
                 SplashScreen(onFinished = {
                     startActivity(Intent(this, EasyMuxHomeActivity::class.java))
                     finish()
@@ -54,7 +54,7 @@ fun SplashScreen(onFinished: () -> Unit) {
         onFinished()
     }
 
-    Surface(modifier = Modifier.fillMaxSize(), color = Color(0xFF0A0E1A)) {
+    Surface(modifier = Modifier.fillMaxSize(), color = HackBackground) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             Image(
                 painter = painterResource(id = R.drawable.easymux_logo),

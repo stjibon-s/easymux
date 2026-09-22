@@ -1,9 +1,16 @@
 package com.termux.app.easymux
 
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -12,18 +19,21 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
 import java.io.File
 
 private const val HOME = "/data/data/com.termux/files/home"
+private val SHARED_STORAGE = Environment.getExternalStorageDirectory().absolutePath
 
 class FileManagerActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MaterialTheme {
+            EasyMuxTheme {
                 FileManagerScreen(onBack = { finish() })
             }
         }
@@ -32,6 +42,8 @@ class FileManagerActivity : ComponentActivity() {
 
 @Composable
 fun FileManagerScreen(onBack: () -> Unit) {
+    val context = LocalContext.current
+    var rootPath by remember { mutableStateOf(HOME) }
     var currentPath by remember { mutableStateOf(HOME) }
     var entries by remember { mutableStateOf(listOf<File>()) }
     var showNewFolderDialog by remember { mutableStateOf(false) }
@@ -40,6 +52,18 @@ fun FileManagerScreen(onBack: () -> Unit) {
     var deleteTarget by remember { mutableStateOf<File?>(null) }
     var newName by remember { mutableStateOf("") }
     var statusMessage by remember { mutableStateOf("") }
+    var hasStoragePermission by remember {
+        mutableStateOf(
+            ContextCompat.checkSelfPermission(context, android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+        )
+    }
+    val storagePermissionLauncher = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+        hasStoragePermission = granted
+        if (granted) {
+            rootPath = SHARED_STORAGE
+            currentPath = SHARED_STORAGE
+        }
+    }
 
     fun refresh() {
         val dir = File(currentPath)
@@ -50,13 +74,27 @@ fun FileManagerScreen(onBack: () -> Unit) {
     LaunchedEffect(currentPath) { refresh() }
 
     fun goUp() {
-        if (currentPath != HOME) {
-            currentPath = File(currentPath).parent ?: HOME
+        if (currentPath != rootPath) {
+            currentPath = File(currentPath).parent ?: rootPath
+        }
+    }
+
+    fun switchStorage() {
+        if (rootPath == HOME) {
+            if (hasStoragePermission) {
+                rootPath = SHARED_STORAGE
+                currentPath = SHARED_STORAGE
+            } else {
+                storagePermissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+            }
+        } else {
+            rootPath = HOME
+            currentPath = HOME
         }
     }
 
     Surface(modifier = Modifier.fillMaxSize()) {
-        Column(modifier = Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.fillMaxSize().statusBarsPadding().navigationBarsPadding()) {
             Row(
                 modifier = Modifier.padding(16.dp),
                 verticalAlignment = Alignment.CenterVertically
@@ -64,18 +102,21 @@ fun FileManagerScreen(onBack: () -> Unit) {
                 IconButton(onClick = onBack) {
                     Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
                 }
-                Text("File Manager", fontSize = 22.sp, fontWeight = FontWeight.Bold)
+                Text("File Manager", fontSize = 22.sp, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
+                TextButton(onClick = { switchStorage() }) {
+                    Text(if (rootPath == HOME) "Shared Storage" else "Termux Home")
+                }
             }
 
             Row(
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                IconButton(onClick = { goUp() }, enabled = currentPath != HOME) {
+                IconButton(onClick = { goUp() }, enabled = currentPath != rootPath) {
                     Icon(Icons.Filled.ArrowUpward, contentDescription = "Up")
                 }
                 Text(
-                    text = currentPath.removePrefix(HOME).ifBlank { "~" },
+                    text = (if (rootPath == HOME) "~" else "Storage") + currentPath.removePrefix(rootPath).ifBlank { "" },
                     fontSize = 13.sp,
                     modifier = Modifier.weight(1f)
                 )
