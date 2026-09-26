@@ -130,6 +130,30 @@
             android:exported="false"
             android:theme="@style/Theme.TermuxActivity.DayNight.NoActionBar" />
 
+                <activity
+            android:name="com.termux.app.easymux.SystemInfoActivity"
+            android:exported="false"
+            android:theme="@style/Theme.TermuxActivity.DayNight.NoActionBar" />
+
+                <activity
+            android:name="com.termux.app.easymux.BackupActivity"
+            android:exported="false"
+            android:theme="@style/Theme.TermuxActivity.DayNight.NoActionBar" />
+
+                <activity
+            android:name="com.termux.app.easymux.BootConfigActivity"
+            android:exported="false"
+            android:theme="@style/Theme.TermuxActivity.DayNight.NoActionBar" />
+
+        <receiver
+            android:name="com.termux.app.easymux.BootReceiver"
+            android:exported="true"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
         <activity-alias
             android:name=".HomeActivity"
             android:exported="true"

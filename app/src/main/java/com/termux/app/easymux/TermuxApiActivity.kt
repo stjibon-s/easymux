@@ -58,7 +58,7 @@ fun TermuxApiScreen(onBack: () -> Unit) {
     var selectedTab by remember { mutableStateOf(0) }
     val tabs = listOf("Battery", "Clipboard", "Vibrate", "Volume", "Share", "Torch", "Location", "Notification", "Brightness")
 
-    Surface(modifier = Modifier.fillMaxSize()) {
+    HackScreen {
         Column(modifier = Modifier.fillMaxSize().statusBarsPadding().navigationBarsPadding()) {
             Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
                 IconButton(onClick = onBack) {

@@ -6,26 +6,35 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 val HackGreen = Color(0xFF39FF14)
 val HackGreenDim = Color(0xFF1FA80E)
 val HackBackground = Color(0xFF0A0E0A)
-val HackSurface = Color(0xFF10160F)
+val HackSurface = Color(0xCC10160F)
 val HackRed = Color(0xFFFF3B3B)
 
 private val HackColorScheme = darkColorScheme(
@@ -97,5 +106,63 @@ fun HackStatusLine(text: String) {
             color = HackGreen.copy(alpha = alpha),
             fontSize = 13.sp
         )
+    }
+}
+
+/**
+ * Animated "digital rain" background, drawn once behind every screen.
+ * Deterministic per-column pattern driven by a single looping time value,
+ * so no manual per-frame mutable state is needed.
+ */
+@Composable
+fun MatrixRainBackground() {
+    val transition = rememberInfiniteTransition(label = "matrix")
+    val time by transition.animateFloat(
+        initialValue = 0f,
+        targetValue = 1000f,
+        animationSpec = infiniteRepeatable(animation = tween(60000, easing = LinearEasing)),
+        label = "matrixTime"
+    )
+    Canvas(modifier = Modifier.fillMaxSize().background(HackBackground)) {
+        val columnWidth = 14.dp.toPx()
+        val columns = (size.width / columnWidth).toInt() + 1
+        val dotHeight = 10.dp.toPx()
+        val dotWidth = 3.dp.toPx()
+        for (i in 0 until columns) {
+            val seed = i * 97 + 13
+            val speed = 40f + (seed % 60)
+            val streakLen = 6 + (seed % 10)
+            val phase = (seed % 300).toFloat()
+            val totalHeight = size.height + streakLen * 20f
+            val y = ((time * speed + phase) % totalHeight) - streakLen * 20f
+            val x = i * columnWidth
+            for (j in 0 until streakLen) {
+                val dotY = y - j * 20f
+                if (dotY in 0f..size.height) {
+                    val alpha = (1f - j.toFloat() / streakLen).coerceIn(0f, 1f) * 0.45f
+                    drawRect(
+                        color = HackGreen.copy(alpha = alpha),
+                        topLeft = Offset(x, dotY),
+                        size = Size(dotWidth, dotHeight)
+                    )
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Standard screen wrapper: matrix rain behind, a transparent "glass" surface on top
+ * carrying the actual content, with all text inside made selectable/copyable.
+ */
+@Composable
+fun HackScreen(content: @Composable () -> Unit) {
+    Box(modifier = Modifier.fillMaxSize()) {
+        MatrixRainBackground()
+        Surface(modifier = Modifier.fillMaxSize(), color = Color.Transparent) {
+            SelectionContainer {
+                content()
+            }
+        }
     }
 }

@@ -91,7 +91,7 @@ fun ScriptsScreen(onBack: () -> Unit) {
         }
     }
 
-    Surface(modifier = Modifier.fillMaxSize()) {
+    HackScreen {
         Column(modifier = Modifier.fillMaxSize().statusBarsPadding().navigationBarsPadding()) {
             Row(
                 modifier = Modifier.padding(16.dp),

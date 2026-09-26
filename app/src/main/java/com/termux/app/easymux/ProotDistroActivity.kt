@@ -147,7 +147,7 @@ fun ProotDistroScreen(onBack: () -> Unit) {
         context.startActivity(Intent(context, TermuxActivity::class.java))
     }
 
-    Surface(modifier = Modifier.fillMaxSize()) {
+    HackScreen {
         Column(modifier = Modifier.fillMaxSize().statusBarsPadding().navigationBarsPadding().padding(16.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 IconButton(onClick = onBack) {

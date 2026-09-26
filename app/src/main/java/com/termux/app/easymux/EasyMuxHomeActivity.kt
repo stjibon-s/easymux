@@ -53,7 +53,10 @@ fun EasyMuxHomeScreen(onOpenTerminal: () -> Unit) {
         FeatureItem("Network Tools", Icons.Filled.Wifi, comingSoon = false),
         FeatureItem("Termux:API", Icons.Filled.PhoneAndroid, comingSoon = false),
         FeatureItem("Linux Distros", Icons.Filled.Storage, comingSoon = false),
-        FeatureItem("Security Tools", Icons.Filled.Shield, comingSoon = false)
+        FeatureItem("Security Tools", Icons.Filled.Shield, comingSoon = false),
+        FeatureItem("System Info", Icons.Filled.Info, comingSoon = false),
+        FeatureItem("Backup & Restore", Icons.Filled.Backup, comingSoon = false),
+        FeatureItem("Auto-run on Boot", Icons.Filled.PowerSettingsNew, comingSoon = false)
     )
 
     fun onFeatureClick(feature: FeatureItem) {
@@ -66,11 +69,14 @@ fun EasyMuxHomeScreen(onOpenTerminal: () -> Unit) {
             "Termux:API" -> context.startActivity(Intent(context, TermuxApiActivity::class.java))
             "Linux Distros" -> context.startActivity(Intent(context, ProotDistroActivity::class.java))
             "Security Tools" -> context.startActivity(Intent(context, SecurityToolsActivity::class.java))
+            "System Info" -> context.startActivity(Intent(context, SystemInfoActivity::class.java))
+            "Backup & Restore" -> context.startActivity(Intent(context, BackupActivity::class.java))
+            "Auto-run on Boot" -> context.startActivity(Intent(context, BootConfigActivity::class.java))
             else -> Toast.makeText(context, "${feature.title} — coming soon", Toast.LENGTH_SHORT).show()
         }
     }
 
-    Surface(modifier = Modifier.fillMaxSize()) {
+    HackScreen {
         Column(
             modifier = Modifier
                 .fillMaxSize()

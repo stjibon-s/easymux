@@ -73,7 +73,7 @@ fun PackageManagerScreen(onBack: () -> Unit) {
     var selectedTab by remember { mutableStateOf(0) }
     val tabs = listOf("Search", "Installed", "Mirror", "Repos")
 
-    Surface(modifier = Modifier.fillMaxSize()) {
+    HackScreen {
         Column(modifier = Modifier.fillMaxSize().statusBarsPadding().navigationBarsPadding()) {
             Row(
                 modifier = Modifier.padding(16.dp),
