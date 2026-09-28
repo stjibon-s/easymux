@@ -116,7 +116,7 @@ fun ProcessManagerScreen(onBack: () -> Unit) {
                 Text(statusMessage, fontSize = 12.sp, modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp))
             }
             Spacer(modifier = Modifier.height(8.dp))
-            if (isLoading) LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+            if (isLoading) HackLoader()
 
             LazyColumn(modifier = Modifier.weight(1f).padding(horizontal = 16.dp)) {
                 items(processes) { proc ->

@@ -154,6 +154,36 @@
             </intent-filter>
         </receiver>
 
+                <activity
+            android:name="com.termux.app.easymux.SettingsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.TermuxActivity.DayNight.NoActionBar" />
+
+                <activity
+            android:name="com.termux.app.easymux.CustomToolBuilderActivity"
+            android:exported="false"
+            android:theme="@style/Theme.TermuxActivity.DayNight.NoActionBar" />
+
+                <activity
+            android:name="com.termux.app.easymux.SshActivity"
+            android:exported="false"
+            android:theme="@style/Theme.TermuxActivity.DayNight.NoActionBar" />
+
+                <activity
+            android:name="com.termux.app.easymux.CronActivity"
+            android:exported="false"
+            android:theme="@style/Theme.TermuxActivity.DayNight.NoActionBar" />
+
+                <activity
+            android:name="com.termux.app.easymux.WidgetCreatorActivity"
+            android:exported="false"
+            android:theme="@style/Theme.TermuxActivity.DayNight.NoActionBar" />
+
+                <activity
+            android:name="com.termux.app.easymux.ShortcutRunnerActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
         <activity-alias
             android:name=".HomeActivity"
             android:exported="true"

@@ -1,0 +1,300 @@
+]633;E;echo "===== PROJECT STRUCTURE =====";f8ba38c5-9635-46da-bf22-b0d13b976cf8]633;C===== PROJECT STRUCTURE =====
+./.editorconfig
+./.git/COMMIT_EDITMSG
+./.git/FETCH_HEAD
+./.git/HEAD
+./.git/ORIG_HEAD
+./.git/config
+./.git/description
+./.git/index
+./.git/packed-refs
+./.gitattributes
+./.github/FUNDING.yml
+./.github/dependabot.yml
+./.gitignore
+./LICENSE.md
+./README.md
+./SECURITY.md
+./app/build.gradle
+./app/easymux_logo_source.png
+./app/testkey_untrusted.jks
+./art/copy-to-other-apps.sh
+./art/feature-graphic.svg
+./art/generate-big-icon.sh
+./art/generate-feature-graphic.sh
+./art/generate-launcher-images.sh
+./art/generate-tv-banner.sh
+./art/ic_launcher.svg
+./art/ic_launcher2.png
+./art/ic_launcher2_round.png
+./art/tv-banner.svg
+./build.gradle
+./easymux-info.txt
+./easymux-source.zip
+./easymux-updates-3.zip
+./gradle.properties
+./gradlew
+./gradlew.bat
+./jitpack.yml
+./local.properties
+./project.zip
+./settings.gradle
+./terminal-emulator/build.gradle
+./terminal-emulator/proguard-rules.pro
+./terminal-view/build.gradle
+./terminal-view/proguard-rules.pro
+./termux-shared/.gitignore
+./termux-shared/LICENSE.md
+./termux-shared/build.gradle
+./termux-shared/proguard-rules.pro
+
+===== APP ID / VERSION / NAME =====
+./termux-shared/src/main/java/com/termux/shared/android/AndroidUtils.java:80:        AndroidUtils.appendPropertyToMarkdown(markdownString,"APP_NAME", PackageUtils.getAppNameForPackage(context, applicationInfo));
+./termux-shared/src/main/java/com/termux/shared/android/AndroidUtils.java:82:        AndroidUtils.appendPropertyToMarkdown(markdownString,"VERSION_NAME", PackageUtils.getVersionNameForPackage(packageInfo));
+./termux-shared/src/main/java/com/termux/shared/android/AndroidUtils.java:83:        AndroidUtils.appendPropertyToMarkdown(markdownString,"VERSION_CODE", PackageUtils.getVersionCodeForPackage(packageInfo));
+./termux-shared/src/main/java/com/termux/shared/android/PackageUtils.java:479:     * Get the {@code versionCode} for the package associated with the {@code context}.
+./termux-shared/src/main/java/com/termux/shared/android/PackageUtils.java:482:     * @return Returns the {@code versionCode}. This will be {@code null} if an exception is raised.
+./termux-shared/src/main/java/com/termux/shared/android/PackageUtils.java:485:    public static Integer getVersionCodeForPackage(@NonNull final Context context) {
+./termux-shared/src/main/java/com/termux/shared/android/PackageUtils.java:486:        return getVersionCodeForPackage(context, context.getPackageName());
+./termux-shared/src/main/java/com/termux/shared/android/PackageUtils.java:490:     * Get the {@code versionCode} for the {@code packageName}.
+./termux-shared/src/main/java/com/termux/shared/android/PackageUtils.java:494:     * @return Returns the {@code versionCode}. This will be {@code null} if an exception is raised.
+./termux-shared/src/main/java/com/termux/shared/android/PackageUtils.java:497:    public static Integer getVersionCodeForPackage(@NonNull final Context context, @NonNull final String packageName) {
+./termux-shared/src/main/java/com/termux/shared/android/PackageUtils.java:498:        return getVersionCodeForPackage(getPackageInfoForPackage(context, packageName));
+./termux-shared/src/main/java/com/termux/shared/android/PackageUtils.java:502:     * Get the {@code versionCode} for the {@code packageName}.
+./termux-shared/src/main/java/com/termux/shared/android/PackageUtils.java:505:     * @return Returns the {@code versionCode}. This will be {@code null} if an exception is raised.
+./termux-shared/src/main/java/com/termux/shared/android/PackageUtils.java:508:    public static Integer getVersionCodeForPackage(@Nullable final PackageInfo packageInfo) {
+./termux-shared/src/main/java/com/termux/shared/android/PackageUtils.java:509:        return packageInfo != null ? packageInfo.versionCode : null;
+./termux-shared/src/main/java/com/termux/shared/android/PackageUtils.java:515:     * Get the {@code versionName} for the package associated with the {@code context}.
+./termux-shared/src/main/java/com/termux/shared/android/PackageUtils.java:518:     * @return Returns the {@code versionName}. This will be {@code null} if an exception is raised.
+./termux-shared/src/main/java/com/termux/shared/android/PackageUtils.java:521:    public static String getVersionNameForPackage(@NonNull final Context context) {
+./termux-shared/src/main/java/com/termux/shared/android/PackageUtils.java:522:        return getVersionNameForPackage(context, context.getPackageName());
+./termux-shared/src/main/java/com/termux/shared/android/PackageUtils.java:526:     * Get the {@code versionName} for the {@code packageName}.
+./termux-shared/src/main/java/com/termux/shared/android/PackageUtils.java:530:     * @return Returns the {@code versionName}. This will be {@code null} if an exception is raised.
+./termux-shared/src/main/java/com/termux/shared/android/PackageUtils.java:533:    public static String getVersionNameForPackage(@NonNull final Context context, @NonNull final String packageName) {
+./termux-shared/src/main/java/com/termux/shared/android/PackageUtils.java:534:        return getVersionNameForPackage(getPackageInfoForPackage(context, packageName));
+./termux-shared/src/main/java/com/termux/shared/android/PackageUtils.java:538:     * Get the {@code versionName} for the {@code packageName}.
+./termux-shared/src/main/java/com/termux/shared/android/PackageUtils.java:541:     * @return Returns the {@code versionName}. This will be {@code null} if an {@code packageInfo}
+./termux-shared/src/main/java/com/termux/shared/android/PackageUtils.java:545:    public static String getVersionNameForPackage(@Nullable final PackageInfo packageInfo) {
+./termux-shared/src/main/java/com/termux/shared/android/PackageUtils.java:546:        return packageInfo != null ? packageInfo.versionName : null;
+./termux-shared/src/main/java/com/termux/shared/activities/ReportActivity.java:153:                actionBar.setTitle(TermuxConstants.TERMUX_APP_NAME + " App Report");
+./termux-shared/src/main/java/com/termux/shared/termux/crash/TermuxCrashUtils.java:317:            title = TermuxConstants.TERMUX_APP_NAME + " Crash Report";
+./termux-shared/src/main/java/com/termux/shared/termux/crash/TermuxCrashUtils.java:337:                FileUtils.sanitizeFileName(TermuxConstants.TERMUX_APP_NAME + "-" + userActionName + ".log", true, true));
+./termux-shared/src/main/java/com/termux/shared/termux/settings/properties/TermuxAppSharedProperties.java:15:        super(context, TermuxConstants.TERMUX_APP_NAME,
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:148: *      - Added `TERMUX_WIKI`, `TERMUX_WIKI_URL`, `TERMUX_PLUGIN_APP_NAMES_LIST`, `TERMUX_PLUGIN_APP_PACKAGE_NAMES_LIST`.
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:298: * The {@link #TERMUX_PACKAGE_NAME} must be the same as the applicationId of termux-app build.gradle
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:306: * - The "applicationId" in "build.gradle" of termux-app. This is package name that android and app
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:308: * - The "manifestPlaceholders" values for {@link #TERMUX_PACKAGE_NAME} and *_APP_NAME in
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:310: * - The "ENTITY" values for {@link #TERMUX_PACKAGE_NAME} and *_APP_NAME in "strings.xml" of
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:321: * "AndroidManifest.xml" and "applicationId" in "build.gradle".
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:350:    public static final String TERMUX_APP_NAME = "Termux"; // Default: "Termux"
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:364:    public static final String TERMUX_API_APP_NAME = "Termux:API"; // Default: "Termux:API"
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:378:    public static final String TERMUX_BOOT_APP_NAME = "Termux:Boot"; // Default: "Termux:Boot"
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:392:    public static final String TERMUX_FLOAT_APP_NAME = "Termux:Float"; // Default: "Termux:Float"
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:406:    public static final String TERMUX_STYLING_APP_NAME = "Termux:Styling"; // Default: "Termux:Styling"
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:420:    public static final String TERMUX_TASKER_APP_NAME = "Termux:Tasker"; // Default: "Termux:Tasker"
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:434:    public static final String TERMUX_WIDGET_APP_NAME = "Termux:Widget"; // Default: "Termux:Widget"
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:454:    public static final List<String> TERMUX_PLUGIN_APP_NAMES_LIST = Arrays.asList(
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:455:        TERMUX_API_APP_NAME,
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:456:        TERMUX_BOOT_APP_NAME,
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:457:        TERMUX_FLOAT_APP_NAME,
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:458:        TERMUX_STYLING_APP_NAME,
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:459:        TERMUX_TASKER_APP_NAME,
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:460:        TERMUX_WIDGET_APP_NAME);
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:536:    public static final String TERMUX_SITE = TERMUX_APP_NAME + " Site"; // Default: "Termux Site"
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:542:    public static final String TERMUX_WIKI = TERMUX_APP_NAME + " Wiki"; // Default: "Termux Wiki"
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:847:    public static final String TERMUX_APP_NOTIFICATION_CHANNEL_NAME = TermuxConstants.TERMUX_APP_NAME + " App";
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:854:    public static final String TERMUX_RUN_COMMAND_NOTIFICATION_CHANNEL_NAME = TermuxConstants.TERMUX_APP_NAME + " RunCommandService";
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:861:    public static final String TERMUX_PLUGIN_COMMAND_ERRORS_NOTIFICATION_CHANNEL_NAME = TermuxConstants.TERMUX_APP_NAME + " Plugin Commands Errors";
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:866:    public static final String TERMUX_CRASH_REPORTS_NOTIFICATION_CHANNEL_NAME = TermuxConstants.TERMUX_APP_NAME + " Crash Reports";
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java:872:    public static final String TERMUX_FLOAT_APP_NOTIFICATION_CHANNEL_NAME = TermuxConstants.TERMUX_FLOAT_APP_NAME + " App";
+./termux-shared/src/main/java/com/termux/shared/termux/shell/command/environment/TermuxAppShellEnvironment.java:107:        ShellEnvironmentUtils.putToEnvIfSet(environment, ENV_TERMUX_VERSION, PackageUtils.getVersionNameForPackage(packageInfo));
+./termux-shared/src/main/java/com/termux/shared/termux/shell/command/environment/TermuxAppShellEnvironment.java:108:        ShellEnvironmentUtils.putToEnvIfSet(environment, ENV_TERMUX_APP__VERSION_NAME, PackageUtils.getVersionNameForPackage(packageInfo));
+./termux-shared/src/main/java/com/termux/shared/termux/shell/command/environment/TermuxAppShellEnvironment.java:109:        ShellEnvironmentUtils.putToEnvIfSet(environment, ENV_TERMUX_APP__VERSION_CODE, String.valueOf(PackageUtils.getVersionCodeForPackage(packageInfo)));
+./termux-shared/src/main/java/com/termux/shared/termux/shell/command/environment/TermuxAPIShellEnvironment.java:38:        ShellEnvironmentUtils.putToEnvIfSet(environment, ENV_TERMUX_API_APP__VERSION_NAME, PackageUtils.getVersionNameForPackage(packageInfo));
+./termux-shared/src/main/java/com/termux/shared/termux/file/TermuxFileUtils.java:382:        executionCommand.commandLabel = TermuxConstants.TERMUX_APP_NAME + " Files Stat Command";
+./termux-shared/src/main/java/com/termux/shared/termux/file/TermuxFileUtils.java:405:        markdownString.append("## ").append(TermuxConstants.TERMUX_APP_NAME).append(" Files Info\n\n");
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxUtils.java:168:        return PackageUtils.isAppInstalled(context, TermuxConstants.TERMUX_APP_NAME, TermuxConstants.TERMUX_PACKAGE_NAME);
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxUtils.java:180:        return PackageUtils.isAppInstalled(context, TermuxConstants.TERMUX_API_APP_NAME, TermuxConstants.TERMUX_API_PACKAGE_NAME);
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxUtils.java:522:        markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_APP_NAME, TermuxConstants.TERMUX_GITHUB_ISSUES_REPO_URL)).append("  ");
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxUtils.java:523:        markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_API_APP_NAME, TermuxConstants.TERMUX_API_GITHUB_ISSUES_REPO_URL)).append("  ");
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxUtils.java:524:        markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_BOOT_APP_NAME, TermuxConstants.TERMUX_BOOT_GITHUB_ISSUES_REPO_URL)).append("  ");
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxUtils.java:525:        markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_FLOAT_APP_NAME, TermuxConstants.TERMUX_FLOAT_GITHUB_ISSUES_REPO_URL)).append("  ");
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxUtils.java:526:        markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_STYLING_APP_NAME, TermuxConstants.TERMUX_STYLING_GITHUB_ISSUES_REPO_URL)).append("  ");
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxUtils.java:527:        markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_TASKER_APP_NAME, TermuxConstants.TERMUX_TASKER_GITHUB_ISSUES_REPO_URL)).append("  ");
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxUtils.java:528:        markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_WIDGET_APP_NAME, TermuxConstants.TERMUX_WIDGET_GITHUB_ISSUES_REPO_URL)).append("  ");
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxUtils.java:552:        markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_APP_NAME, TermuxConstants.TERMUX_GITHUB_REPO_URL)).append("  ");
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxUtils.java:553:        markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_API_APP_NAME, TermuxConstants.TERMUX_API_GITHUB_REPO_URL)).append("  ");
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxUtils.java:554:        markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_BOOT_APP_NAME, TermuxConstants.TERMUX_BOOT_GITHUB_REPO_URL)).append("  ");
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxUtils.java:555:        markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_FLOAT_APP_NAME, TermuxConstants.TERMUX_FLOAT_GITHUB_REPO_URL)).append("  ");
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxUtils.java:556:        markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_STYLING_APP_NAME, TermuxConstants.TERMUX_STYLING_GITHUB_REPO_URL)).append("  ");
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxUtils.java:557:        markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_TASKER_APP_NAME, TermuxConstants.TERMUX_TASKER_GITHUB_REPO_URL)).append("  ");
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxUtils.java:558:        markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_WIDGET_APP_NAME, TermuxConstants.TERMUX_WIDGET_GITHUB_REPO_URL)).append("  ");
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxUtils.java:569:        markdownString.append("\n").append(MarkdownUtils.getLinkMarkdownString(TermuxConstants.TERMUX_APP_NAME, TermuxConstants.TERMUX_GITHUB_WIKI_REPO_URL)).append("  ");
+./termux-shared/src/main/java/com/termux/shared/termux/TermuxUtils.java:623:        markdownString.append("## ").append(TermuxConstants.TERMUX_APP_NAME).append(" APT Info\n\n");
+./termux-shared/src/main/java/com/termux/shared/termux/plugins/TermuxPluginUtils.java:354:            title = TermuxConstants.TERMUX_APP_NAME + " Plugin Execution Command Error";
+./termux-shared/src/main/java/com/termux/shared/termux/plugins/TermuxPluginUtils.java:375:                FileUtils.sanitizeFileName(TermuxConstants.TERMUX_APP_NAME + "-" + userActionName + ".log", true, true));
+./termux-shared/src/main/res/values/strings.xml:5:    <!ENTITY TERMUX_APP_NAME "Termux">
+./termux-shared/src/main/res/values/strings.xml:6:    <!ENTITY TERMUX_API_APP_NAME "Termux:API">
+./termux-shared/src/main/res/values/strings.xml:7:    <!ENTITY TERMUX_BOOT_APP_NAME "Termux:Boot">
+./termux-shared/src/main/res/values/strings.xml:8:    <!ENTITY TERMUX_FLOAT_APP_NAME "Termux:Float">
+./termux-shared/src/main/res/values/strings.xml:9:    <!ENTITY TERMUX_STYLING_APP_NAME "Termux:Styling">
+./termux-shared/src/main/res/values/strings.xml:10:    <!ENTITY TERMUX_TASKER_APP_NAME "Termux:Tasker">
+./termux-shared/src/main/res/values/strings.xml:11:    <!ENTITY TERMUX_WIDGET_APP_NAME "Termux:Widget">
+./termux-shared/src/main/res/values/strings.xml:95:    <string name="msg_termux_app_required_by_app">The &TERMUX_APP_NAME; is required by the %1$s app to run termux commands.</string>
+./termux-shared/src/main/res/values/strings.xml:96:    <string name="error_termux_app_package_context_not_accessible">The &TERMUX_APP_NAME; app (package context) is not accessible.</string>
+./termux-shared/src/main/res/values/strings.xml:97:    <string name="error_termux_prefix_dir_path_not_accessible">The &TERMUX_APP_NAME; app $PREFIX directory is not accessible by the %1$s app.
+./termux-shared/src/main/res/values/strings.xml:98:        This may be because you have not installed or setup &TERMUX_APP_NAME; app or
+./termux-shared/src/main/res/values/strings.xml:99:        &TERMUX_APP_NAME; app and %1$s app both have different APK signatures because you have managed to install both apps from different sources.
+./termux-shared/src/main/res/values/strings.xml:100:        It may also be because &TERMUX_APP_NAME; $PREFIX directory \"&TERMUX_PREFIX_DIR_PATH;\" does not exist or does not have read,
+./README.md:208:You can help debug problems of the `Termux` app and its plugins by setting appropriate `logcat` `Log Level` in `Termux` app settings -> `<APP_NAME>` -> `Debugging` -> `Log Level` (Requires `Termux` app version `>= 0.118.0`). The `Log Level` defaults to `Normal` and log level `Verbose` currently logs additional information. Its best to revert log level to `Normal` after you have finished debugging since private data may otherwise be passed to `logcat` during normal operation and moreover, additional logging increases execution time.
+./README.md:236:The `versionName` in `build.gradle` files of Termux and its plugin apps must follow the [semantic version `2.0.0` spec](https://semver.org/spec/v2.0.0.html) in the format `major.minor.patch(-prerelease)(+buildmetadata)`. When bumping `versionName` in `build.gradle` files and when creating a tag for new releases on GitHub, make sure to include the patch number as well, like `v0.1.0` instead of just `v0.1`. The `build.gradle` files and `attach_debug_apks_to_release` workflow validates the version as well and the build/attachment will fail if `versionName` does not follow the spec.
+./app/build.gradle:22:    def appVersionName = System.getenv("TERMUX_APP_VERSION_NAME") ?: ""
+./app/build.gradle:48:        versionCode 118
+./app/build.gradle:49:        versionName "0.118.0"
+./app/build.gradle:51:        if (appVersionName) versionName = appVersionName
+./app/build.gradle:52:        validateVersionName(versionName)
+./app/build.gradle:57:        manifestPlaceholders.TERMUX_APP_NAME = "Termux"
+./app/build.gradle:58:        manifestPlaceholders.TERMUX_API_APP_NAME = "Termux:API"
+./app/build.gradle:59:        manifestPlaceholders.TERMUX_BOOT_APP_NAME = "Termux:Boot"
+./app/build.gradle:60:        manifestPlaceholders.TERMUX_FLOAT_APP_NAME = "Termux:Float"
+./app/build.gradle:61:        manifestPlaceholders.TERMUX_STYLING_APP_NAME = "Termux:Styling"
+./app/build.gradle:62:        manifestPlaceholders.TERMUX_TASKER_APP_NAME = "Termux:Tasker"
+./app/build.gradle:63:        manifestPlaceholders.TERMUX_WIDGET_APP_NAME = "Termux:Widget"
+./app/build.gradle:176:task versionName {
+./app/build.gradle:178:        print android.defaultConfig.versionName
+./app/build.gradle:182:def validateVersionName(String versionName) {
+./app/build.gradle:185:    if (!java.util.regex.Pattern.matches("^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?\$", versionName))
+./app/build.gradle:186:        throw new GradleException("The versionName '"  + versionName + "' is not a valid version as per semantic version '2.0.0' spec in the format 'major.minor.patch(-prerelease)(+buildmetadata)'. https://semver.org/spec/v2.0.0.html.")
+./app/src/main/java/com/termux/app/terminal/TermuxTerminalViewClient.java:736:        MessageDialogUtils.showMessage(mActivity, TermuxConstants.TERMUX_APP_NAME + " Report Issue",
+./app/src/main/java/com/termux/app/terminal/TermuxTerminalViewClient.java:751:                String title = TermuxConstants.TERMUX_APP_NAME + " Report Issue";
+./app/src/main/java/com/termux/app/terminal/TermuxTerminalViewClient.java:785:                        FileUtils.sanitizeFileName(TermuxConstants.TERMUX_APP_NAME + "-" + userActionName + ".log", true, true));
+./app/src/main/java/com/termux/app/TermuxService.java:314:        mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TermuxConstants.TERMUX_APP_NAME.toLowerCase() + ":service-wakelock");
+./app/src/main/java/com/termux/app/TermuxService.java:319:        mWifiLock = wm.createWifiLock(WifiManager.WIFI_MODE_FULL_HIGH_PERF, TermuxConstants.TERMUX_APP_NAME.toLowerCase());
+./app/src/main/java/com/termux/app/TermuxService.java:811:            TermuxConstants.TERMUX_APP_NAME, notificationText, null,
+./app/src/main/java/com/termux/app/activities/SettingsActivity.java:133:                                    FileUtils.sanitizeFileName(TermuxConstants.TERMUX_APP_NAME + "-" + userActionName + ".log", true, true));
+./app/src/main/java/com/termux/app/easymux/NetworkToolsActivity.kt:1:package com.termux.app.easymux
+./app/src/main/java/com/termux/app/easymux/NetworkToolsActivity.kt:63:            EasyMuxTheme {
+./app/src/main/java/com/termux/app/easymux/ProotDistroActivity.kt:1:package com.termux.app.easymux
+./app/src/main/java/com/termux/app/easymux/ProotDistroActivity.kt:69:            EasyMuxTheme {
+./app/src/main/java/com/termux/app/easymux/ProotDistroActivity.kt:145:        clipboard.setPrimaryClip(ClipData.newPlainText("EasyMux", command))
+./app/src/main/java/com/termux/app/easymux/BootConfigActivity.kt:1:package com.termux.app.easymux
+./app/src/main/java/com/termux/app/easymux/BootConfigActivity.kt:29:            EasyMuxTheme {
+./app/src/main/java/com/termux/app/easymux/BackupActivity.kt:1:package com.termux.app.easymux
+./app/src/main/java/com/termux/app/easymux/BackupActivity.kt:38:private val BACKUP_DIR = "$SHARED_STORAGE/EasyMuxBackups"
+./app/src/main/java/com/termux/app/easymux/BackupActivity.kt:63:            EasyMuxTheme {
+./app/src/main/java/com/termux/app/easymux/BackupActivity.kt:102:            val fileName = "easymux-backup-$timestamp.tar.gz"
+./app/src/main/java/com/termux/app/easymux/BackupActivity.kt:137:                "Backs up your Termux home folder to Shared Storage > EasyMuxBackups",
+./app/src/main/java/com/termux/app/easymux/Theme.kt:1:package com.termux.app.easymux
+./app/src/main/java/com/termux/app/easymux/Theme.kt:66:fun EasyMuxTheme(content: @Composable () -> Unit) {
+./app/src/main/java/com/termux/app/easymux/EasyMuxHomeActivity.kt:1:package com.termux.app.easymux
+./app/src/main/java/com/termux/app/easymux/EasyMuxHomeActivity.kt:24:class EasyMuxHomeActivity : ComponentActivity() {
+./app/src/main/java/com/termux/app/easymux/EasyMuxHomeActivity.kt:28:            EasyMuxTheme {
+./app/src/main/java/com/termux/app/easymux/EasyMuxHomeActivity.kt:29:                EasyMuxHomeScreen(
+./app/src/main/java/com/termux/app/easymux/EasyMuxHomeActivity.kt:46:fun EasyMuxHomeScreen(onOpenTerminal: () -> Unit) {
+./app/src/main/java/com/termux/app/easymux/EasyMuxHomeActivity.kt:93:                        text = "EasyMux",
+./app/src/main/java/com/termux/app/easymux/ProcessManagerActivity.kt:1:package com.termux.app.easymux
+./app/src/main/java/com/termux/app/easymux/ProcessManagerActivity.kt:57:            EasyMuxTheme {
+./app/src/main/java/com/termux/app/easymux/SecurityToolsActivity.kt:1:package com.termux.app.easymux
+./app/src/main/java/com/termux/app/easymux/SecurityToolsActivity.kt:67:            EasyMuxTheme {
+./app/src/main/java/com/termux/app/easymux/SecurityToolsActivity.kt:279:        clipboard.setPrimaryClip(ClipData.newPlainText("EasyMux", command))
+./app/src/main/java/com/termux/app/easymux/ScriptsActivity.kt:1:package com.termux.app.easymux
+./app/src/main/java/com/termux/app/easymux/ScriptsActivity.kt:55:            EasyMuxTheme {
+./app/src/main/java/com/termux/app/easymux/FileManagerActivity.kt:1:package com.termux.app.easymux
+./app/src/main/java/com/termux/app/easymux/FileManagerActivity.kt:36:            EasyMuxTheme {
+./app/src/main/java/com/termux/app/easymux/PackageManagerActivity.kt:1:package com.termux.app.easymux
+./app/src/main/java/com/termux/app/easymux/PackageManagerActivity.kt:64:            EasyMuxTheme {
+./app/src/main/java/com/termux/app/easymux/PackageManagerActivity.kt:158:        clipboard.setPrimaryClip(ClipData.newPlainText("EasyMux", pkgName))
+./app/src/main/java/com/termux/app/easymux/PackageManagerActivity.kt:221:        clipboard.setPrimaryClip(ClipData.newPlainText("EasyMux", name))
+./app/src/main/java/com/termux/app/easymux/SystemInfoActivity.kt:1:package com.termux.app.easymux
+./app/src/main/java/com/termux/app/easymux/SystemInfoActivity.kt:56:            EasyMuxTheme {
+./app/src/main/java/com/termux/app/easymux/SystemInfoActivity.kt:91:            "${pInfo.versionName} (build ${pInfo.longVersionCode})"
+./app/src/main/java/com/termux/app/easymux/SystemInfoActivity.kt:122:        InfoCard("EasyMux", listOf("Version: $appVersion"))
+./app/src/main/java/com/termux/app/easymux/BootReceiver.kt:1:package com.termux.app.easymux
+./app/src/main/java/com/termux/app/easymux/BootReceiver.kt:10:const val BOOT_PREFS_NAME = "easymux_boot_prefs"
+./app/src/main/java/com/termux/app/easymux/TermuxApiActivity.kt:1:package com.termux.app.easymux
+./app/src/main/java/com/termux/app/easymux/TermuxApiActivity.kt:49:            EasyMuxTheme {
+./app/src/main/java/com/termux/app/easymux/TermuxApiActivity.kt:163:            clipboardManager.setPrimaryClip(ClipData.newPlainText("EasyMux", textToCopy))
+./app/src/main/java/com/termux/app/easymux/TermuxApiActivity.kt:322:    var title by remember { mutableStateOf("EasyMux") }
+./app/src/main/java/com/termux/app/easymux/TermuxApiActivity.kt:348:                val channelId = "easymux_channel"
+./app/src/main/java/com/termux/app/easymux/TermuxApiActivity.kt:351:                    val channel = NotificationChannel(channelId, "EasyMux Notifications", NotificationManager.IMPORTANCE_DEFAULT)
+./app/src/main/java/com/termux/app/easymux/SplashActivity.kt:1:package com.termux.app.easymux
+./app/src/main/java/com/termux/app/easymux/SplashActivity.kt:33:            EasyMuxTheme {
+./app/src/main/java/com/termux/app/easymux/SplashActivity.kt:35:                    startActivity(Intent(this, EasyMuxHomeActivity::class.java))
+./app/src/main/java/com/termux/app/easymux/SplashActivity.kt:60:                painter = painterResource(id = R.drawable.easymux_logo),
+./app/src/main/java/com/termux/app/easymux/SplashActivity.kt:61:                contentDescription = "EasyMux",
+./app/src/main/java/com/termux/app/api/file/FileReceiverActivity.java:53:    private static final String API_TAG = TermuxConstants.TERMUX_APP_NAME + "FileReceiver";
+./app/src/main/java/com/termux/app/TermuxActivity.java:219:        // This will also fail if TermuxConstants.TERMUX_PACKAGE_NAME does not equal applicationId
+./app/src/main/java/com/termux/app/TermuxApplication.java:77:        Logger.setDefaultLogTag(TermuxConstants.TERMUX_APP_NAME);
+./app/src/main/java/com/termux/app/TermuxInstaller.java:122:                    Logger.logInfo(LOG_TAG, "Installing " + TermuxConstants.TERMUX_APP_NAME + " bootstrap packages.");
+./app/src/main/java/com/termux/app/TermuxInstaller.java:267:        final String title = TermuxConstants.TERMUX_APP_NAME + " Bootstrap Error";
+./app/src/main/java/com/termux/app/TermuxInstaller.java:279:        final String title = TermuxConstants.TERMUX_APP_NAME + " Setup Storage Error";
+./app/src/main/res/xml/shortcuts.xml:6:        If applicationId in build.gradle is changed from "com.termux", then targetPackage will
+./app/src/main/res/xml/shortcuts.xml:7:        need to be manually patched since ${applicationId} variable or resource string does not work.
+./app/src/main/res/values/strings.xml:5:    <!ENTITY TERMUX_APP_NAME "Termux">
+./app/src/main/res/values/strings.xml:6:    <!ENTITY TERMUX_API_APP_NAME "Termux:API">
+./app/src/main/res/values/strings.xml:7:    <!ENTITY TERMUX_BOOT_APP_NAME "Termux:Boot">
+./app/src/main/res/values/strings.xml:8:    <!ENTITY TERMUX_FLOAT_APP_NAME "Termux:Float">
+./app/src/main/res/values/strings.xml:9:    <!ENTITY TERMUX_STYLING_APP_NAME "Termux:Styling">
+./app/src/main/res/values/strings.xml:10:    <!ENTITY TERMUX_TASKER_APP_NAME "Termux:Tasker">
+./app/src/main/res/values/strings.xml:11:    <!ENTITY TERMUX_WIDGET_APP_NAME "Termux:Widget">
+./app/src/main/res/values/strings.xml:16:    <string name="application_name">EasyMux</string>
+./app/src/main/res/values/strings.xml:17:    <string name="shared_user_label">&TERMUX_APP_NAME; user</string>
+./app/src/main/res/values/strings.xml:22:    <string name="permission_run_command_label">Run commands in &TERMUX_APP_NAME; environment</string>
+./app/src/main/res/values/strings.xml:23:    <string name="permission_run_command_description">execute arbitrary commands within &TERMUX_APP_NAME;
+./app/src/main/res/values/strings.xml:31:    <string name="bootstrap_error_body">&TERMUX_APP_NAME; was unable to install the bootstrap packages.</string>
+./app/src/main/res/values/strings.xml:34:    <string name="bootstrap_error_not_primary_user_message">&TERMUX_APP_NAME; can only be run as the primary user.
+./app/src/main/res/values/strings.xml:35:        \nBootstrap binaries compiled for &TERMUX_APP_NAME; have hardcoded $PREFIX path and cannot be installed
+./app/src/main/res/values/strings.xml:37:    <string name="bootstrap_error_installed_on_portable_sd">&TERMUX_APP_NAME; cannot be installed on
+./app/src/main/res/values/strings.xml:39:        \nBootstrap binaries compiled for &TERMUX_APP_NAME; have hardcoded $PREFIX path and cannot be installed
+./app/src/main/res/values/strings.xml:94:    <string name="error_styling_not_installed">The &TERMUX_STYLING_APP_NAME; Plugin App is not installed.</string>
+./app/src/main/res/values/strings.xml:107:    <string name="error_display_over_other_apps_permission_not_granted_to_start_terminal">&TERMUX_APP_NAME; requires
+./app/src/main/res/values/strings.xml:109:        Grants it from Settings -> Apps -> &TERMUX_APP_NAME; -> Advanced</string>
+./app/src/main/res/values/strings.xml:139:    <string name="title_activity_termux_settings">&TERMUX_APP_NAME; Settings</string>
+./app/src/main/res/values/strings.xml:142:    <string name="termux_preferences_title">&TERMUX_APP_NAME;</string>
+./app/src/main/res/values/strings.xml:143:    <string name="termux_preferences_summary">Preferences for &TERMUX_APP_NAME; app</string>
+./app/src/main/res/values/strings.xml:209:    <string name="termux_api_preferences_title">&TERMUX_API_APP_NAME;</string>
+./app/src/main/res/values/strings.xml:210:    <string name="termux_api_preferences_summary">Preferences for &TERMUX_API_APP_NAME; app</string>
+./app/src/main/res/values/strings.xml:215:    <string name="termux_float_preferences_title">&TERMUX_FLOAT_APP_NAME;</string>
+./app/src/main/res/values/strings.xml:216:    <string name="termux_float_preferences_summary">Preferences for &TERMUX_FLOAT_APP_NAME; app</string>
+./app/src/main/res/values/strings.xml:221:    <string name="termux_tasker_preferences_title">&TERMUX_TASKER_APP_NAME;</string>
+./app/src/main/res/values/strings.xml:222:    <string name="termux_tasker_preferences_summary">Preferences for &TERMUX_TASKER_APP_NAME; app</string>
+./app/src/main/res/values/strings.xml:227:    <string name="termux_widget_preferences_title">&TERMUX_WIDGET_APP_NAME;</string>
+./app/src/main/res/values/strings.xml:228:    <string name="termux_widget_preferences_summary">Preferences for &TERMUX_WIDGET_APP_NAME; app</string>
+./app/src/main/AndroidManifest.xml:79:            android:name="com.termux.app.easymux.SplashActivity"
+./app/src/main/AndroidManifest.xml:89:            android:name="com.termux.app.easymux.EasyMuxHomeActivity"
+./app/src/main/AndroidManifest.xml:94:            android:name="com.termux.app.easymux.PackageManagerActivity"
+./app/src/main/AndroidManifest.xml:99:            android:name="com.termux.app.easymux.FileManagerActivity"
+./app/src/main/AndroidManifest.xml:104:            android:name="com.termux.app.easymux.ScriptsActivity"
+./app/src/main/AndroidManifest.xml:109:            android:name="com.termux.app.easymux.ProcessManagerActivity"
+./app/src/main/AndroidManifest.xml:114:            android:name="com.termux.app.easymux.NetworkToolsActivity"
+./app/src/main/AndroidManifest.xml:119:            android:name="com.termux.app.easymux.ProotDistroActivity"
+./app/src/main/AndroidManifest.xml:124:            android:name="com.termux.app.easymux.TermuxApiActivity"
+./app/src/main/AndroidManifest.xml:129:            android:name="com.termux.app.easymux.SecurityToolsActivity"
+./app/src/main/AndroidManifest.xml:134:            android:name="com.termux.app.easymux.SystemInfoActivity"
+./app/src/main/AndroidManifest.xml:139:            android:name="com.termux.app.easymux.BackupActivity"
+./app/src/main/AndroidManifest.xml:144:            android:name="com.termux.app.easymux.BootConfigActivity"
+./app/src/main/AndroidManifest.xml:149:            android:name="com.termux.app.easymux.BootReceiver"
+./.github/workflows/attach_debug_apks_to_release.yml:40:           exit_on_error "The versionName '${RELEASE_VERSION_NAME/v/}' is not a valid version as per semantic version '2.0.0' spec in the format 'major.minor.patch(-prerelease)(+buildmetadata)'. https://semver.org/spec/v2.0.0.html."
+./.github/workflows/debug_build.yml:44:          CURRENT_VERSION_NAME_REGEX='\s+versionName "([^"]+)"$'
+./.github/workflows/debug_build.yml:48:           exit_on_error "The versionName '${RELEASE_VERSION_NAME/v/}' is not a valid version as per semantic version '2.0.0' spec in the format 'major.minor.patch(-prerelease)(+buildmetadata)'. https://semver.org/spec/v2.0.0.html."
+
+===== SDK =====
+./termux-shared/build.gradle:7:    compileSdkVersion project.properties.compileSdkVersion.toInteger()
+./termux-shared/build.gradle:35:        compileSdkVersion project.properties.compileSdkVersion.toInteger()
+./termux-shared/build.gradle:36:        minSdkVersion project.properties.minSdkVersion.toInteger()
+./termux-shared/build.gradle:37:        targetSdkVersion project.properties.targetSdkVersion.toInteger()
+./app/build.gradle:20:    compileSdkVersion project.properties.compileSdkVersion.toInteger()
+./app/build.gradle:46:        minSdkVersion project.properties.minSdkVersion.toInteger()
+./app/build.gradle:47:        targetSdkVersion project.properties.targetSdkVersion.toInteger()
+./gradle.properties:17:minSdkVersion=21
+./gradle.properties:18:targetSdkVersion=28
+./gradle.properties:20:compileSdkVersion=36
+./terminal-emulator/build.gradle:7:    compileSdkVersion project.properties.compileSdkVersion.toInteger()
+./terminal-emulator/build.gradle:11:        minSdkVersion project.properties.minSdkVersion.toInteger()
+./terminal-emulator/build.gradle:12:        targetSdkVersion project.properties.targetSdkVersion.toInteger()
+./terminal-view/build.gradle:6:    compileSdkVersion project.properties.compileSdkVersion.toInteger()
+./terminal-view/build.gradle:14:        minSdkVersion project.properties.minSdkVersion.toInteger()
+./terminal-view/build.gradle:15:        targetSdkVersion project.properties.targetSdkVersion.toInteger()
+
+===== README FILES =====
+./README.md

@@ -179,7 +179,7 @@ fun SearchTab() {
             Text(statusMessage, fontSize = 13.sp)
         }
         Spacer(modifier = Modifier.height(12.dp))
-        if (isLoading) LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+        if (isLoading) HackLoader()
         LazyColumn(modifier = Modifier.weight(1f)) {
             items(results) { pkg ->
                 val isInstalled = installedNames.contains(pkg.name)
@@ -283,7 +283,7 @@ fun InstalledTab() {
             Text(statusMessage, fontSize = 13.sp)
         }
         Spacer(modifier = Modifier.height(12.dp))
-        if (isLoading) LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+        if (isLoading) HackLoader()
         LazyColumn(modifier = Modifier.weight(1f)) {
             items(installed) { pkg ->
                 ElevatedCard(modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)) {
@@ -341,7 +341,7 @@ fun MirrorTab() {
             Text(statusMessage, fontSize = 13.sp)
             Spacer(modifier = Modifier.height(12.dp))
         }
-        if (busy) LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+        if (busy) HackLoader()
         mirrors.forEach { mirror ->
             ElevatedCard(
                 modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),

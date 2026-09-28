@@ -205,7 +205,7 @@ fun ScriptsScreen(onBack: () -> Unit) {
             text = {
                 if (isRunning) {
                     Column {
-                        LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+                        HackLoader()
                         Spacer(modifier = Modifier.height(8.dp))
                         Text("Running...")
                     }

@@ -128,7 +128,7 @@ fun PingTab() {
                 }
             }, enabled = !isLoading) { Text("Ping") }
         }
-        if (isLoading) { Spacer(modifier = Modifier.height(8.dp)); LinearProgressIndicator(modifier = Modifier.fillMaxWidth()) }
+        if (isLoading) { Spacer(modifier = Modifier.height(8.dp)); HackLoader() }
         OutputBlock("ping -c 4 $host", output)
     }
 }
@@ -157,7 +157,7 @@ fun PortTab() {
                 isLoading = false
             }
         }, enabled = !isLoading, modifier = Modifier.fillMaxWidth()) { Text("Check Port") }
-        if (isLoading) { Spacer(modifier = Modifier.height(8.dp)); LinearProgressIndicator(modifier = Modifier.fillMaxWidth()) }
+        if (isLoading) { Spacer(modifier = Modifier.height(8.dp)); HackLoader() }
         OutputBlock("nc -zv -w 3 $host $port", output)
     }
 }
@@ -186,7 +186,7 @@ fun DnsTab() {
                 }
             }, enabled = !isLoading) { Text("Lookup") }
         }
-        if (isLoading) { Spacer(modifier = Modifier.height(8.dp)); LinearProgressIndicator(modifier = Modifier.fillMaxWidth()) }
+        if (isLoading) { Spacer(modifier = Modifier.height(8.dp)); HackLoader() }
         OutputBlock("dig $host any +noall +answer", output)
     }
 }
@@ -215,7 +215,7 @@ fun TracerouteTab() {
             }, enabled = !isLoading) { Text("Trace") }
         }
         Text("May take up to 25 seconds", fontSize = 11.sp)
-        if (isLoading) { Spacer(modifier = Modifier.height(8.dp)); LinearProgressIndicator(modifier = Modifier.fillMaxWidth()) }
+        if (isLoading) { Spacer(modifier = Modifier.height(8.dp)); HackLoader() }
         OutputBlock("traceroute -m 15 $host", output)
     }
 }
@@ -258,7 +258,7 @@ fun IpInfoTab() {
                 isLoading = false
             }
         }, enabled = !isLoading, modifier = Modifier.fillMaxWidth()) { Text("Get Public IP Info") }
-        if (isLoading) { Spacer(modifier = Modifier.height(8.dp)); LinearProgressIndicator(modifier = Modifier.fillMaxWidth()) }
+        if (isLoading) { Spacer(modifier = Modifier.height(8.dp)); HackLoader() }
         OutputBlock("curl -s ipinfo.io", publicIpOutput)
     }
 }
@@ -285,7 +285,7 @@ fun HttpTestTab() {
                 isLoading = false
             }
         }, enabled = !isLoading, modifier = Modifier.fillMaxWidth()) { Text("Test") }
-        if (isLoading) { Spacer(modifier = Modifier.height(8.dp)); LinearProgressIndicator(modifier = Modifier.fillMaxWidth()) }
+        if (isLoading) { Spacer(modifier = Modifier.height(8.dp)); HackLoader() }
         OutputBlock("curl -s -o /dev/null -w ... $url", output)
     }
 }

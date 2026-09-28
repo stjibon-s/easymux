@@ -159,7 +159,7 @@ fun BackupScreen(onBack: () -> Unit) {
             }
             if (isBusy) {
                 Spacer(modifier = Modifier.height(8.dp))
-                LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+                HackLoader()
             }
 
             Spacer(modifier = Modifier.height(20.dp))

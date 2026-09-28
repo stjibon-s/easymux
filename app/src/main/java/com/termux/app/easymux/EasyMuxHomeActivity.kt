@@ -56,7 +56,11 @@ fun EasyMuxHomeScreen(onOpenTerminal: () -> Unit) {
         FeatureItem("Security Tools", Icons.Filled.Shield, comingSoon = false),
         FeatureItem("System Info", Icons.Filled.Info, comingSoon = false),
         FeatureItem("Backup & Restore", Icons.Filled.Backup, comingSoon = false),
-        FeatureItem("Auto-run on Boot", Icons.Filled.PowerSettingsNew, comingSoon = false)
+        FeatureItem("Auto-run on Boot", Icons.Filled.PowerSettingsNew, comingSoon = false),
+        FeatureItem("My Tools", Icons.Filled.Build, comingSoon = false),
+        FeatureItem("SSH", Icons.Filled.Lock, comingSoon = false),
+        FeatureItem("Scheduled Tasks", Icons.Filled.Schedule, comingSoon = false),
+        FeatureItem("Home Shortcuts", Icons.Filled.AddToHomeScreen, comingSoon = false)
     )
 
     fun onFeatureClick(feature: FeatureItem) {
@@ -72,6 +76,10 @@ fun EasyMuxHomeScreen(onOpenTerminal: () -> Unit) {
             "System Info" -> context.startActivity(Intent(context, SystemInfoActivity::class.java))
             "Backup & Restore" -> context.startActivity(Intent(context, BackupActivity::class.java))
             "Auto-run on Boot" -> context.startActivity(Intent(context, BootConfigActivity::class.java))
+            "My Tools" -> context.startActivity(Intent(context, CustomToolBuilderActivity::class.java))
+            "SSH" -> context.startActivity(Intent(context, SshActivity::class.java))
+            "Scheduled Tasks" -> context.startActivity(Intent(context, CronActivity::class.java))
+            "Home Shortcuts" -> context.startActivity(Intent(context, WidgetCreatorActivity::class.java))
             else -> Toast.makeText(context, "${feature.title} — coming soon", Toast.LENGTH_SHORT).show()
         }
     }
@@ -104,7 +112,7 @@ fun EasyMuxHomeScreen(onOpenTerminal: () -> Unit) {
                     )
                 }
                 IconButton(onClick = {
-                    Toast.makeText(context, "Settings — coming soon", Toast.LENGTH_SHORT).show()
+                    context.startActivity(Intent(context, SettingsActivity::class.java))
                 }) {
                     Icon(Icons.Filled.Settings, contentDescription = "Settings", tint = HackGreen)
                 }

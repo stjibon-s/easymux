@@ -130,7 +130,7 @@ fun MatrixRainBackground() {
         val dotWidth = 3.dp.toPx()
         for (i in 0 until columns) {
             val seed = i * 97 + 13
-            val speed = 40f + (seed % 60)
+            val speed = 3f + (seed % 6)
             val streakLen = 6 + (seed % 10)
             val phase = (seed % 300).toFloat()
             val totalHeight = size.height + streakLen * 20f
@@ -152,9 +152,42 @@ fun MatrixRainBackground() {
 }
 
 /**
- * Standard screen wrapper: matrix rain behind, a transparent "glass" surface on top
- * carrying the actual content, with all text inside made selectable/copyable.
+ * ASCII bracket-style "hacking" loading indicator, e.g. [####------] PROCESSING...
+ * Used everywhere instead of a plain Material progress bar.
  */
+@Composable
+fun HackLoader(modifier: Modifier = Modifier, label: String = "PROCESSING") {
+    val transition = rememberInfiniteTransition(label = "loader")
+    val step by transition.animateFloat(
+        initialValue = 0f,
+        targetValue = 11f,
+        animationSpec = infiniteRepeatable(animation = tween(1200, easing = LinearEasing)),
+        label = "loaderStep"
+    )
+    val filled = step.toInt().coerceIn(0, 10)
+    val bar = "[" + "#".repeat(filled) + "-".repeat(10 - filled) + "]"
+    Text(
+        "$bar $label...",
+        fontFamily = FontFamily.Monospace,
+        color = HackGreen,
+        fontSize = 13.sp,
+        modifier = modifier.fillMaxWidth()
+    )
+}
+
+/**
+ * A "glass" translucent card wrapper matching the hacking theme, drop-in replacement
+ * for M3 ElevatedCard where a stronger see-through matrix-behind-card effect is wanted.
+ */
+@Composable
+fun HackGlassBox(modifier: Modifier = Modifier, content: @Composable () -> Unit) {
+    androidx.compose.foundation.layout.Box(
+        modifier = modifier
+            .background(HackSurface)
+    ) {
+        content()
+    }
+}
 @Composable
 fun HackScreen(content: @Composable () -> Unit) {
     Box(modifier = Modifier.fillMaxSize()) {
@@ -164,5 +197,6 @@ fun HackScreen(content: @Composable () -> Unit) {
                 content()
             }
         }
+        PopupTerminalOverlay()
     }
 }

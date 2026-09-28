@@ -157,7 +157,7 @@ fun ReconTab() {
                 isNmapLoading = false
             }
         }, enabled = !isNmapLoading, modifier = Modifier.fillMaxWidth()) { Text("Scan") }
-        if (isNmapLoading) { Spacer(modifier = Modifier.height(8.dp)); LinearProgressIndicator(modifier = Modifier.fillMaxWidth()) }
+        if (isNmapLoading) { Spacer(modifier = Modifier.height(8.dp)); HackLoader() }
         ReconOutputBlock("nmap -p $ports $target", nmapOutput)
 
         Spacer(modifier = Modifier.height(28.dp))
@@ -174,7 +174,7 @@ fun ReconTab() {
                 isWhatwebLoading = false
             }
         }, enabled = !isWhatwebLoading, modifier = Modifier.fillMaxWidth()) { Text("Identify") }
-        if (isWhatwebLoading) { Spacer(modifier = Modifier.height(8.dp)); LinearProgressIndicator(modifier = Modifier.fillMaxWidth()) }
+        if (isWhatwebLoading) { Spacer(modifier = Modifier.height(8.dp)); HackLoader() }
         ReconOutputBlock("whatweb $whatwebUrl", whatwebOutput)
 
         Spacer(modifier = Modifier.height(28.dp))
@@ -193,7 +193,7 @@ fun ReconTab() {
                 isNiktoLoading = false
             }
         }, enabled = !isNiktoLoading, modifier = Modifier.fillMaxWidth()) { Text("Scan") }
-        if (isNiktoLoading) { Spacer(modifier = Modifier.height(8.dp)); LinearProgressIndicator(modifier = Modifier.fillMaxWidth()) }
+        if (isNiktoLoading) { Spacer(modifier = Modifier.height(8.dp)); HackLoader() }
         ReconOutputBlock("nikto -h $niktoUrl", niktoOutput)
         Spacer(modifier = Modifier.height(20.dp))
     }
