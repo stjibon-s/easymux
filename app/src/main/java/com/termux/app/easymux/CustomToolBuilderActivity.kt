@@ -112,13 +112,13 @@ fun CustomToolBuilderScreen(onBack: () -> Unit, storage: ToolStorage) {
 
     HackScreen {
         Column(modifier = Modifier.fillMaxSize().statusBarsPadding().navigationBarsPadding().padding(16.dp)) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 IconButton(onClick = onBack) {
                     Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
                 }
                 Text("My Tools", fontSize = 22.sp, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
                 IconButton(onClick = { showBuilder = true }) {
-                    Icon(Icons.Filled.Add, contentDescription = "New Tool")
+                    Icon(Icons.Filled.Add, contentDescription = "New Tool", tint = HackGreen)
                 }
             }
             Text(

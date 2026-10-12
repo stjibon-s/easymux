@@ -141,20 +141,6 @@
             android:theme="@style/Theme.TermuxActivity.DayNight.NoActionBar" />
 
                 <activity
-            android:name="com.termux.app.easymux.BootConfigActivity"
-            android:exported="false"
-            android:theme="@style/Theme.TermuxActivity.DayNight.NoActionBar" />
-
-        <receiver
-            android:name="com.termux.app.easymux.BootReceiver"
-            android:exported="true"
-            android:enabled="true">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
-
-                <activity
             android:name="com.termux.app.easymux.SettingsActivity"
             android:exported="false"
             android:theme="@style/Theme.TermuxActivity.DayNight.NoActionBar" />
@@ -168,21 +154,6 @@
             android:name="com.termux.app.easymux.SshActivity"
             android:exported="false"
             android:theme="@style/Theme.TermuxActivity.DayNight.NoActionBar" />
-
-                <activity
-            android:name="com.termux.app.easymux.CronActivity"
-            android:exported="false"
-            android:theme="@style/Theme.TermuxActivity.DayNight.NoActionBar" />
-
-                <activity
-            android:name="com.termux.app.easymux.WidgetCreatorActivity"
-            android:exported="false"
-            android:theme="@style/Theme.TermuxActivity.DayNight.NoActionBar" />
-
-                <activity
-            android:name="com.termux.app.easymux.ShortcutRunnerActivity"
-            android:exported="true"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <activity-alias
             android:name=".HomeActivity"

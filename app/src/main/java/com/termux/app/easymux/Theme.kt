@@ -8,10 +8,14 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -110,69 +114,174 @@ fun HackStatusLine(text: String) {
 }
 
 /**
- * Animated "digital rain" background, drawn once behind every screen.
- * Deterministic per-column pattern driven by a single looping time value,
- * so no manual per-frame mutable state is needed.
+ * Sci-fi "HUD control room" style background: faint grid lines, slowly scrolling
+ * number-grid columns along the left/right edges, and corner reticle brackets.
+ * Inspired by sci-fi control-panel interfaces (not a literal falling-code matrix rain).
+ * Deterministic, driven by a single looping time value — no manual per-frame state.
  */
 @Composable
 fun MatrixRainBackground() {
-    val transition = rememberInfiniteTransition(label = "matrix")
+    val transition = rememberInfiniteTransition(label = "hud")
     val time by transition.animateFloat(
         initialValue = 0f,
         targetValue = 1000f,
-        animationSpec = infiniteRepeatable(animation = tween(60000, easing = LinearEasing)),
-        label = "matrixTime"
+        animationSpec = infiniteRepeatable(animation = tween(90000, easing = LinearEasing)),
+        label = "hudTime"
+    )
+    val pulse by transition.animateFloat(
+        initialValue = 0.3f,
+        targetValue = 0.9f,
+        animationSpec = infiniteRepeatable(animation = tween(1800, easing = LinearEasing), repeatMode = RepeatMode.Reverse),
+        label = "hudPulse"
     )
     Canvas(modifier = Modifier.fillMaxSize().background(HackBackground)) {
-        val columnWidth = 14.dp.toPx()
-        val columns = (size.width / columnWidth).toInt() + 1
-        val dotHeight = 10.dp.toPx()
-        val dotWidth = 3.dp.toPx()
-        for (i in 0 until columns) {
-            val seed = i * 97 + 13
-            val speed = 3f + (seed % 6)
-            val streakLen = 6 + (seed % 10)
-            val phase = (seed % 300).toFloat()
-            val totalHeight = size.height + streakLen * 20f
-            val y = ((time * speed + phase) % totalHeight) - streakLen * 20f
-            val x = i * columnWidth
-            for (j in 0 until streakLen) {
-                val dotY = y - j * 20f
-                if (dotY in 0f..size.height) {
-                    val alpha = (1f - j.toFloat() / streakLen).coerceIn(0f, 1f) * 0.45f
-                    drawRect(
-                        color = HackGreen.copy(alpha = alpha),
-                        topLeft = Offset(x, dotY),
-                        size = Size(dotWidth, dotHeight)
-                    )
+        // Faint grid
+        val gridSpacing = 40.dp.toPx()
+        var gx = 0f
+        while (gx < size.width) {
+            drawLine(HackGreen.copy(alpha = 0.06f), Offset(gx, 0f), Offset(gx, size.height), strokeWidth = 1f)
+            gx += gridSpacing
+        }
+        var gy = 0f
+        while (gy < size.height) {
+            drawLine(HackGreen.copy(alpha = 0.06f), Offset(0f, gy), Offset(size.width, gy), strokeWidth = 1f)
+            gy += gridSpacing
+        }
+
+        // Scrolling number-grid columns along the left and right edges
+        val colWidth = 16.dp.toPx()
+        val rowHeight = 12.dp.toPx()
+        val edgeColumns = 2
+        val rows = (size.height / rowHeight).toInt() + 2
+        for (side in 0..1) {
+            for (c in 0 until edgeColumns) {
+                val colSeed = side * 53 + c * 19 + 7
+                val speed = 6f + (colSeed % 5)
+                val x = if (side == 0) c * colWidth + 6.dp.toPx() else size.width - (c + 1) * colWidth - 6.dp.toPx()
+                for (r in 0 until rows) {
+                    val rowSeed = colSeed * 31 + r * 11
+                    val scrollOffset = ((time * speed) % (rows * rowHeight))
+                    val y = ((r * rowHeight - scrollOffset) % (rows * rowHeight) + rows * rowHeight) % (rows * rowHeight)
+                    val blockOn = (rowSeed + (time.toInt() / 40)) % 3 != 0
+                    if (blockOn) {
+                        val alpha = 0.12f + 0.1f * ((rowSeed % 5) / 5f)
+                        drawRect(
+                            color = HackGreenDim.copy(alpha = alpha),
+                            topLeft = Offset(x, y),
+                            size = Size(colWidth - 3.dp.toPx(), rowHeight - 3.dp.toPx())
+                        )
+                    }
                 }
             }
         }
+
+        // Corner reticle brackets
+        val bracketLen = 18.dp.toPx()
+        val inset = 14.dp.toPx()
+        val sw = 2.dp.toPx()
+        val c = HackGreen.copy(alpha = pulse * 0.6f)
+        // top-left
+        drawLine(c, Offset(inset, inset), Offset(inset + bracketLen, inset), strokeWidth = sw)
+        drawLine(c, Offset(inset, inset), Offset(inset, inset + bracketLen), strokeWidth = sw)
+        // top-right
+        drawLine(c, Offset(size.width - inset, inset), Offset(size.width - inset - bracketLen, inset), strokeWidth = sw)
+        drawLine(c, Offset(size.width - inset, inset), Offset(size.width - inset, inset + bracketLen), strokeWidth = sw)
+        // bottom-left
+        drawLine(c, Offset(inset, size.height - inset), Offset(inset + bracketLen, size.height - inset), strokeWidth = sw)
+        drawLine(c, Offset(inset, size.height - inset), Offset(inset, size.height - inset - bracketLen), strokeWidth = sw)
+        // bottom-right
+        drawLine(c, Offset(size.width - inset, size.height - inset), Offset(size.width - inset - bracketLen, size.height - inset), strokeWidth = sw)
+        drawLine(c, Offset(size.width - inset, size.height - inset), Offset(size.width - inset, size.height - inset - bracketLen), strokeWidth = sw)
     }
 }
 
+private val hackLoaderPhrases = listOf(
+    "Establishing secure connection",
+    "Verifying package integrity",
+    "Reading system state",
+    "Processing request",
+    "Writing changes",
+    "Finalizing operation"
+)
+
 /**
- * ASCII bracket-style "hacking" loading indicator, e.g. [####------] PROCESSING...
- * Used everywhere instead of a plain Material progress bar.
+ * "SYSTEM OVERRIDE IN PROGRESS"-style bordered loading panel: a title row, a cycling
+ * list of status lines (typewriter reveal with a blinking cursor on the active line),
+ * a bordered fill-bar, and a looping percentage readout. Used everywhere the app
+ * shows a loading/running state instead of a plain Material progress bar.
  */
 @Composable
 fun HackLoader(modifier: Modifier = Modifier, label: String = "PROCESSING") {
     val transition = rememberInfiniteTransition(label = "loader")
-    val step by transition.animateFloat(
+    val progress by transition.animateFloat(
         initialValue = 0f,
-        targetValue = 11f,
-        animationSpec = infiniteRepeatable(animation = tween(1200, easing = LinearEasing)),
-        label = "loaderStep"
+        targetValue = 100f,
+        animationSpec = infiniteRepeatable(animation = tween(5000, easing = LinearEasing)),
+        label = "loaderProgress"
     )
-    val filled = step.toInt().coerceIn(0, 10)
-    val bar = "[" + "#".repeat(filled) + "-".repeat(10 - filled) + "]"
-    Text(
-        "$bar $label...",
-        fontFamily = FontFamily.Monospace,
-        color = HackGreen,
-        fontSize = 13.sp,
-        modifier = modifier.fillMaxWidth()
+    val cursorAlpha by transition.animateFloat(
+        initialValue = 1f,
+        targetValue = 0f,
+        animationSpec = infiniteRepeatable(animation = tween(450, easing = LinearEasing), repeatMode = RepeatMode.Reverse),
+        label = "loaderCursor"
     )
+    val lineCount = hackLoaderPhrases.size
+    val activeIndex = ((progress / 100f) * lineCount).toInt().coerceIn(0, lineCount - 1)
+
+    androidx.compose.foundation.layout.Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(HackSurface)
+            .border(1.dp, HackGreen)
+            .padding(10.dp)
+    ) {
+        Row {
+            Text("\u2620 ", color = HackGreen, fontFamily = FontFamily.Monospace, fontSize = 13.sp)
+            Text(
+                "$label...",
+                color = HackGreen,
+                fontFamily = FontFamily.Monospace,
+                fontSize = 13.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+        androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(6.dp))
+        for (i in 0..activeIndex) {
+            val isLast = i == activeIndex
+            Row {
+                Text("> ${hackLoaderPhrases[i]}...", color = HackGreen, fontFamily = FontFamily.Monospace, fontSize = 11.sp)
+                if (isLast) {
+                    Text(
+                        "_",
+                        color = HackGreen.copy(alpha = cursorAlpha),
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 11.sp
+                    )
+                }
+            }
+        }
+        androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(8.dp))
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(12.dp)
+                .border(1.dp, HackGreen)
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .fillMaxWidth(fraction = (progress / 100f).coerceIn(0f, 1f))
+                    .background(HackGreen)
+            )
+        }
+        androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(4.dp))
+        Text(
+            "LOADING: ${progress.toInt()}%",
+            color = HackGreen,
+            fontFamily = FontFamily.Monospace,
+            fontSize = 11.sp
+        )
+    }
 }
 
 /**
@@ -192,7 +301,7 @@ fun HackGlassBox(modifier: Modifier = Modifier, content: @Composable () -> Unit)
 fun HackScreen(content: @Composable () -> Unit) {
     Box(modifier = Modifier.fillMaxSize()) {
         MatrixRainBackground()
-        Surface(modifier = Modifier.fillMaxSize(), color = Color.Transparent) {
+        Surface(modifier = Modifier.fillMaxSize(), color = Color.Transparent, contentColor = HackGreen) {
             SelectionContainer {
                 content()
             }

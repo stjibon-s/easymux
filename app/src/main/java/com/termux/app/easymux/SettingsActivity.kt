@@ -103,12 +103,7 @@ fun SettingsScreen(onBack: () -> Unit) {
             ) {
                 Text("Backup & Restore", modifier = Modifier.padding(16.dp))
             }
-            ElevatedCard(
-                modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
-                onClick = { context.startActivity(Intent(context, BootConfigActivity::class.java)) }
-            ) {
-                Text("Auto-run on Boot", modifier = Modifier.padding(16.dp))
-            }
+
 
             Spacer(modifier = Modifier.height(20.dp))
             Text("About", fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
